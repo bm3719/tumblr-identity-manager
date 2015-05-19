@@ -1,0 +1,36 @@
+* tumblr-identity-manager
+
+This project demonstrates how to seamlessly combine a Clojure back-end with a
+JavaScript front-end, in the case where data structures are shared between
+layers.
+
+Concepts covered:
+- Automated case style conversion.
+- Traversing forms with clojure.walk.
+- Memoization and threshold profiling with clojure.core.memoize.
+
+* Usage
+
+To start the application:
+
+#+BEGIN_SRC sh
+lein ring server
+#+END_SRC
+
+To run the application and connect to the REPL:
+
+#+BEGIN_SRC sh
+lein repl :headless
+#+END_SRC
+
+Connect to the REPL in Emacs, then run:
+
+#+BEGIN_SRC clojure
+(boot)
+#+END_SRC
+
+* License
+
+Copyright © 2015
+
+Distributed under the GNU Public License version 3.0.
