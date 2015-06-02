@@ -19,16 +19,13 @@
       (constantly
        (jetty/run-jetty
         #'handler/app
-        {:join?        join?
-         :port         3000
-         :ssl?         false})))
-     (doseq [handler (remove #(= (class %) ServletContextHandler)
-                             (seq (.getHandlers server)))]
-       (.removeHandler server handler)))
+        {:join? join?
+         :port  3000
+         :ssl?  false}))))
   ([] (boot false)))
 
 (defn restart
-  "Restart Jetty server." []
+  "Restart the Jetty server." []
   (if (nil? server) (boot)
       (do
         (when (= (org.eclipse.jetty.server.Server/getState server) "STARTED")
