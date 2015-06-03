@@ -6,5 +6,34 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="utf-8">
   </head>
-  Hello.
+  <center>
+    <h1>Tumblr Identity Manager</h1>
+    <h2>identity management for special snowflakes</h2>
+  </center>
+  <br /><p />
+  <button id="button1">get all identities records</button>
+  <script type="text/javascript">
+   $('#button1').click(function() {
+     $.getJSON("http://localhost:3000/identity/",
+               function(data) {
+       var html = ""
+       for (var i = 0; i<data.length; i++) {
+         html += "<tr><td>Name:</td><td>" + data[i].name + "</td></tr>";
+         html += "<tr><td>Sexuality:</td><td>" + data[i].sexuality + "</td></tr>";
+         html += "<tr><td>Gender:</td><td>" + data[i].gender + "</td></tr>";
+         html += "<tr><td>Therian Species:</td><td>" + data[i]['therian-species'] + "</td></tr>";
+         html += "<tr><td>Trans-size:</td><td>" + data[i]['trans-size'] + "</td></tr>";
+         html += "<tr><td>Headmates:</td><td>" + data[i].headmates + "</td></tr>";
+         html += "<tr><td>Trigger words:</td><td>" + data[i]['trigger-words'] + "</td></tr>";
+         html += "<tr><td>Trans-ethnicity:</td><td>" + data[i]['trans-ethnicity'] + "</td></tr>";
+         html += "<tr><td></td><td></td></tr>";
+         html += "<tr><td></td><td></td></tr>";
+       }
+       $('.user').append(html);
+     });
+   });
+  </script>
+  <p />
+  <table class="user">
+  </table>
 </html>
