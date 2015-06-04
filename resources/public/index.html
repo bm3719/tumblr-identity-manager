@@ -20,13 +20,19 @@
        var html = ""
        for (var i = 0; i<data.length; i++) {
          html += "<tr><td>Name:</td><td>" + data[i].name + "</td></tr>";
+         html += "<tr><td>Preferred name:</td><td>" + data[i].preferredName + "</td></tr>";
+         html += "<tr><td>Identity types:</td><td>" + data[i].identityTypes + "</td></tr>";
+         html += "<tr><td>Therian Species:</td><td>" + data[i].terianSpecies + "</td></tr>";
          html += "<tr><td>Sexuality:</td><td>" + data[i].sexuality + "</td></tr>";
          html += "<tr><td>Gender:</td><td>" + data[i].gender + "</td></tr>";
-         html += "<tr><td>Therian Species:</td><td>" + data[i]['therian-species'] + "</td></tr>";
-         html += "<tr><td>Trans-size:</td><td>" + data[i]['trans-size'] + "</td></tr>";
+         html += "<tr><td>Trans-size:</td><td>" + data[i].transSize + "</td></tr>";
+         html += "<tr><td>Trans-ethnicity:</td><td>" + data[i].transEthnicity + "</td></tr>";
+         html += "<tr><td>Social Justice Causes:</td><td>" + data[i].socialJusticeCauses + "</td></tr>";
+         html += "<tr><td>Nounself Pronouns:</td><td>" + data[i].nounselfPronouns + "</td></tr>";
+         html += "<tr><td>Trigger words:</td><td>" + data[i].triggerWords + "</td></tr>";
+         html += "<tr><td>Disabilities:</td><td>" + data[i].disabilities + "</td></tr>";
          html += "<tr><td>Headmates:</td><td>" + data[i].headmates + "</td></tr>";
-         html += "<tr><td>Trigger words:</td><td>" + data[i]['trigger-words'] + "</td></tr>";
-         html += "<tr><td>Trans-ethnicity:</td><td>" + data[i]['trans-ethnicity'] + "</td></tr>";
+         html += "<tr><td>Tuplas:</td><td>" + data[i].tulpas + "</td></tr>";
          html += "<tr><td></td><td></td></tr>";
          html += "<tr><td></td><td></td></tr>";
        }

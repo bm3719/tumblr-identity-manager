@@ -1,5 +1,7 @@
 (ns tumblr-identity-manager.handler
-  (:require [cheshire.core :as cheshire]
+  (:require [tumblr-identity-manager.utility :as util]
+            [tumblr-identity-manager.data :as data]
+            [cheshire.core :as cheshire]
             [cheshire.generate :as generate]
             [compojure.core :as cc]
             [compojure.handler :as handler]
@@ -13,70 +15,33 @@
              "Cache-Control" "no-cache, no-store, must-revalidate"
              "Pragma" "no-cache"
              "Expires" "0"}
-   :body (cheshire/generate-string to-render)})
+   :body (cheshire/generate-string
+          (util/kebab->camel to-render))})
 
 (defn json-404 []
   {:status 404
    :headers {"Content-Type" "text/html; charset=utf-8"}
    :body "Not found"})
 
-;; (def app-routes
-;;   (apply
-;;    cc/routes (flatten
-;;               [(cc/make-route :get "/" (fn [req] (response/redirect "/index.html")))
-;;                (route/resources "/")
-;;                (route/not-found "Not Found")])))
+(defn link-children
+  "Embeds maps in a parent who references their :_id fields in
+  sub-vectors." [col k]
+  (map #(assoc % k (for [id (k (first data/identity))]
+                     (some (fn [m] (if (= (:_id m) id) m)) data/identity)))
+       col))
 
-;; TODO: Replace these.
 (defn get-maps
-  "Replace this later with a DB layer call." [table]
-  [{:_id 1
-    :name "Bruce C. Miller"
-    :sexuality "Lithromantic"
-    :gender "Trigender"
-    :therian-species "Plantkin"
-    :trans-size "Rubenesque"
-    :headmates ["Steelfang Ringtails"
-                "Gleep"]
-    :trigger-words ["Food"
-                    "Homogenous"
-                    "Monkey necklace"]
-    :trans-ethnicity "German"}
-   {:_id 2
-    :name "Erik J. Seppanen"
-    :sexuality "Pomosexual"
-    :gender "Genderfluid"
-    :therian-species "Shloof"
-    :trans-size "Transthin"
-    :headmates ["Indigo Child"
-                "Pyrofox"]
-    :trigger-words ["Uncle Gary"
-                    "The"
-                    "Fishmonger"]
-    :trans-ethnicity "Finnish"}
-   {:_id 3
-    :name "Josh Q. Lents"
-    :sexuality "Autosexual"
-    :gender "Bi-androgynous"
-    :therian-species "Pandakin"
-    :trans-size "Rubenesque"
-    :headmates ["Wayne Border"
-                "President Obama"]
-    :trigger-words ["Doctor"]
-    :trans-ethnicity "German"}])
+  "Simulates a function that goes to the database and grabs the specified table
+  and does something with it prior to returning it to the front end.  Here,
+  we're just assuming it's the identity table and only returning top-level
+  records, then manually splicing in the child records." [table]
+  (let [ref-ids (flatten (map #(concat (:headmates %) (:tuplas %)) data/identity))]
+    (as-> (filter #(not (some #{(:_id %)} ref-ids)) data/identity) $
+      (link-children $ :headmates)
+      (link-children $ :tuplas))))
+
 (defn get-by-id [table id]
-  {:_id 1
-   :name "Bruce C. Miller"
-   :sexuality "Lithromantic"
-   :gender "Trigender"
-   :therian-species "Plantkin"
-   :trans-size "Rubenesque"
-   :headmates ["Steelfang Ringtails"
-               "Gleep"]
-   :trigger-words ["Food"
-                   "Homogenous"
-                   "Monkey necklace"]
-   :trans-ethnicity "German"})
+  (some #(if (= (:_id %) (util/str->int id)) %) (get-maps table)))
 
 (defmacro response
   "Creates responses used for endpoints."

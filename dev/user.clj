@@ -3,6 +3,7 @@
 (ns user
   (:require [tumblr-identity-manager.handler :as handler]
             [tumblr-identity-manager.camel-kebab :as ck]
+            [tumblr-identity-manager.data :as data]
             [tumblr-identity-manager.utility :as util]
             [clojure.pprint :refer [pp pprint]]
             [clojure.repl :refer [doc]]

@@ -27,3 +27,9 @@
 (defn camel-str->kebab
   "Given a string, converts it to kebab-case.  Excludes _id." [s]
   (if (= s "_id") s (memoized->kebab-case s)))
+
+;;; General utility functions.
+
+(defn str->int
+  "Safely parse untrusted strings to ints." [str]
+  (if (re-matches (re-pattern "\\d+") str) (read-string str)))
