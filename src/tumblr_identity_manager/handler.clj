@@ -30,7 +30,8 @@
 ;; TODO: Replace these.
 (defn get-maps
   "Replace this later with a DB layer call." [table]
-  [{:name "Bruce C. Miller"
+  [{:_id 1
+    :name "Bruce C. Miller"
     :sexuality "Lithromantic"
     :gender "Trigender"
     :therian-species "Plantkin"
@@ -41,7 +42,8 @@
                     "Homogenous"
                     "Monkey necklace"]
     :trans-ethnicity "German"}
-   {:name "Erik J. Seppanen"
+   {:_id 2
+    :name "Erik J. Seppanen"
     :sexuality "Pomosexual"
     :gender "Genderfluid"
     :therian-species "Shloof"
@@ -52,7 +54,8 @@
                     "The"
                     "Fishmonger"]
     :trans-ethnicity "Finnish"}
-   {:name "Josh Q. Lents"
+   {:_id 3
+    :name "Josh Q. Lents"
     :sexuality "Autosexual"
     :gender "Bi-androgynous"
     :therian-species "Pandakin"
@@ -62,17 +65,18 @@
     :trigger-words ["Doctor"]
     :trans-ethnicity "German"}])
 (defn get-by-id [table id]
-  {:name "Bruce C. Miller"
-    :sexuality "Lithromantic"
-    :gender "Trigender"
-    :therian-species "Plantkin"
-    :trans-size "Rubenesque"
-    :headmates ["Steelfang Ringtails"
-                "Gleep"]
-    :trigger-words ["Food"
-                    "Homogenous"
-                    "Monkey necklace"]
-    :trans-ethnicity "German"})
+  {:_id 1
+   :name "Bruce C. Miller"
+   :sexuality "Lithromantic"
+   :gender "Trigender"
+   :therian-species "Plantkin"
+   :trans-size "Rubenesque"
+   :headmates ["Steelfang Ringtails"
+               "Gleep"]
+   :trigger-words ["Food"
+                   "Homogenous"
+                   "Monkey necklace"]
+   :trans-ethnicity "German"})
 
 (defmacro response
   "Creates responses used for endpoints."

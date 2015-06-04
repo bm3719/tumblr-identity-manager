@@ -2,6 +2,8 @@
 ;;;; interacting with the data at the REPL, or for general development.
 (ns user
   (:require [tumblr-identity-manager.handler :as handler]
+            [tumblr-identity-manager.camel-kebab :as ck]
+            [tumblr-identity-manager.utility :as util]
             [clojure.pprint :refer [pp pprint]]
             [clojure.repl :refer [doc]]
             [clojure.tools.namespace.repl :as repl]
