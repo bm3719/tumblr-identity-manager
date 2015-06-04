@@ -25,7 +25,7 @@
 
 (defn link-children
   "Embeds maps in a parent who references their :_id fields in
-  sub-vectors." [col k]
+  sub-vector k." [col k]
   (map #(assoc % k (for [id (k (first data/identity))]
                      (some (fn [m] (if (= (:_id m) id) m)) data/identity)))
        col))

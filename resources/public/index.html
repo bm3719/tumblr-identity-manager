@@ -6,35 +6,104 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="utf-8">
     <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+    <style type="text/css">
+     body {
+       font-family: sans-serif;
+       color: #04021F;
+       background-color: #C8DCDA;
+       font-size: 14px;
+       margin: 0;
+       padding: 0;
+     }
+     td {
+       font-size: 15px;
+       font-family: sans-serif;
+       vertical-align: top;
+     }
+     td#title {
+       background-color: #9DCDD7;
+     }
+     td#cnt {
+       background-color: #B5BCBD;
+     }
+     tr#div {
+       background-color: #FFFFFF;
+     }
+     table {
+       width: 75%;
+       border: 2px;
+       border-style: solid;
+       border-color: #FFFFFF;
+     }
+    </style>
   </head>
   <center>
     <h1>Tumblr Identity Manager</h1>
     <h2>identity management for special snowflakes</h2>
   </center>
   <br /><p />
-  <button id="button1">get all identities records</button>
+  <center>
+  <button id="button1">get all identity records</button>
   <script type="text/javascript">
    $('#button1').click(function() {
      $.getJSON("http://localhost:3000/identity",
                function(data) {
-       var html = ""
+       var html = "";
+       var headmates = "";
+       function drawNounselfPronouns(pronouns) {
+         var pronounHTML = "";
+         pronounHTML += "<table>";
+         pronounHTML += "<tr><td id=\"title\">Third Singular Subject:</td><td id=\"cnt\">" + pronouns.thirdSingularSubject + "</td></tr>";
+         pronounHTML += "<tr><td id=\"title\">Third Singular Object:</td><td id=\"cnt\">" + pronouns.thirdSingularObject + "</td></tr>";
+         pronounHTML += "<tr><td id=\"title\">Reflexive:</td><td>" + pronouns.reflexive + "</td></tr>";
+         pronounHTML += "</table>";
+         return pronounHTML;
+       }
+       function drawShiftCapabilities(shifts) {
+         var shiftHTML = "";
+         shiftHTML += "<table>";
+         shiftHTML += "<tr><td id=\"title\">e-shift:</td><td id=\"cnt\">" + shifts.eShift + "</td></tr>";
+         shiftHTML += "<tr><td id=\"title\">m-shift:</td><td id=\"cnt\">" + shifts.mShift + "</td></tr>";
+         shiftHTML += "<tr><td id=\"title\">p-shift:</td><td id=\"cnt\">" + shifts.pShift + "</td></tr>";
+         shiftHTML += "</table>";
+         return shiftHTML;
+       }
+       function drawSubIdentities(identity, field) {
+          var identityHTML = "";
+          for (var j=0; j<identity[field].length; j++) {
+            identityHTML += "<table>";
+            identityHTML += drawIdentity(identity[field][j]);
+            identityHTML += "</table>";
+         }
+         return identityHTML;
+         }
+       function drawArray(arr) {
+         arrHTML = arr.join("<br />");
+         return arrHTML;
+       }
+       function drawIdentity(identity) {
+         var identityHTML = "";
+         identityHTML += "<tr><td id=\"title\">Name:</td><td id=\"cnt\">" + identity.name + "</td></tr>";
+         identityHTML += "<tr><td id=\"title\">Preferred name:</td><td id=\"cnt\">" + identity.preferredName + "</td></tr>";
+         identityHTML += "<tr><td id=\"title\">Identity types:</td><td id=\"cnt\">" + drawArray(identity.identityTypes) + "</td></tr>";
+         identityHTML += "<tr><td id=\"title\">Therian Species:</td><td id=\"cnt\">" + identity.therianSpecies + "</td></tr>";
+         identityHTML += "<tr><td id=\"title\">Sexuality:</td><td id=\"cnt\">" + identity.sexuality + "</td></tr>";
+         identityHTML += "<tr><td id=\"title\">Gender:</td><td id=\"cnt\">" + identity.gender + "</td></tr>";
+         identityHTML += "<tr><td id=\"title\">Trans-size:</td><td id=\"cnt\">" + identity.transSize + "</td></tr>";
+         identityHTML += "<tr><td id=\"title\">Trans-ethnicity:</td><td id=\"cnt\">" + identity.transEthnicity + "</td></tr>";
+         identityHTML += "<tr><td id=\"title\">Shift capabilities:</td><td id=\"cnt\">" + drawShiftCapabilities(identity.shiftCapabilities) + "</td></tr>";
+         identityHTML += "<tr><td id=\"title\">Nounself pronouns:</td><td id=\"cnt\">" + drawNounselfPronouns(identity.nounselfPronouns) + "</td></tr>";
+         identityHTML += "<tr><td id=\"title\">Social justice causes:</td><td id=\"cnt\">" + drawArray(identity.socialJusticeCauses) + "</td></tr>";
+         identityHTML += "<tr><td id=\"title\">Trigger words:</td><td id=\"cnt\">" + drawArray(identity.triggerWords) + "</td></tr>";
+         identityHTML += "<tr><td id=\"title\">Disabilities:</td><td id=\"cnt\">" + drawArray(identity.disabilities) + "</td></tr>";
+         identityHTML += "<tr><td id=\"title\">Headmates:</td><td id=\"cnt\">" + drawSubIdentities(identity, "headmates") + "</td></tr>";
+         identityHTML += "<tr><td id=\"title\">Tuplas:</td><td id=\"cnt\">" + drawSubIdentities(identity, "tuplas") + "</td></tr>";
+         identityHTML += "<tr id=\"div\"><td></td><td></td></tr>";
+         identityHTML += "<tr id=\"div\"><td></td><td></td></tr>";
+         return identityHTML;
+       }
        for (var i = 0; i<data.length; i++) {
-         html += "<tr><td>Name:</td><td>" + data[i].name + "</td></tr>";
-         html += "<tr><td>Preferred name:</td><td>" + data[i].preferredName + "</td></tr>";
-         html += "<tr><td>Identity types:</td><td>" + data[i].identityTypes + "</td></tr>";
-         html += "<tr><td>Therian Species:</td><td>" + data[i].terianSpecies + "</td></tr>";
-         html += "<tr><td>Sexuality:</td><td>" + data[i].sexuality + "</td></tr>";
-         html += "<tr><td>Gender:</td><td>" + data[i].gender + "</td></tr>";
-         html += "<tr><td>Trans-size:</td><td>" + data[i].transSize + "</td></tr>";
-         html += "<tr><td>Trans-ethnicity:</td><td>" + data[i].transEthnicity + "</td></tr>";
-         html += "<tr><td>Social Justice Causes:</td><td>" + data[i].socialJusticeCauses + "</td></tr>";
-         html += "<tr><td>Nounself Pronouns:</td><td>" + data[i].nounselfPronouns + "</td></tr>";
-         html += "<tr><td>Trigger words:</td><td>" + data[i].triggerWords + "</td></tr>";
-         html += "<tr><td>Disabilities:</td><td>" + data[i].disabilities + "</td></tr>";
-         html += "<tr><td>Headmates:</td><td>" + data[i].headmates + "</td></tr>";
-         html += "<tr><td>Tuplas:</td><td>" + data[i].tulpas + "</td></tr>";
-         html += "<tr><td></td><td></td></tr>";
-         html += "<tr><td></td><td></td></tr>";
+         html += drawIdentity(data[i]);
        }
        $('.user').append(html);
      });
@@ -43,4 +112,5 @@
   <p />
   <table class="user">
   </table>
+  </center>
 </html>
