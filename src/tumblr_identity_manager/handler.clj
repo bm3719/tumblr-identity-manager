@@ -24,10 +24,10 @@
    :body "Not found"})
 
 (defn link-children
-  "Embeds maps in a parent who references their :_id fields in
-  sub-vector k." [col k]
-  (map #(assoc % k (for [id (k (first data/identity))]
-                     (some (fn [m] (if (= (:_id m) id) m)) data/identity)))
+  "Embeds maps in a parent that exists in vector v who references their :_id
+  fields in sub-vector k." [col k v]
+  (map #(assoc % k (for [id (k (first v))]
+                     (some (fn [m] (if (= (:_id m) id) m)) v)))
        col))
 
 (defn get-maps
@@ -35,10 +35,10 @@
   and does something with it prior to returning it to the front end.  Here,
   we're just assuming it's the identity table and only returning top-level
   records, then manually splicing in the child records." [table]
-  (let [ref-ids (flatten (map #(concat (:headmates %) (:tuplas %)) data/identity))]
-    (as-> (filter #(not (some #{(:_id %)} ref-ids)) data/identity) $
-      (link-children $ :headmates)
-      (link-children $ :tuplas))))
+  (let [ref-ids (flatten (map #(concat (:headmates %) (:tuplas %)) table))]
+    (as-> (filter #(not (some #{(:_id %)} ref-ids)) table) $
+      (link-children $ :headmates table)
+      (link-children $ :tuplas table))))
 
 (defn get-by-id [table id]
   (some #(if (= (:_id %) (util/str->int id)) %) (get-maps table)))
@@ -49,8 +49,8 @@
   ([entity-name id] `(json-200 (get-by-id ~entity-name ~id))))
 
 (cc/defroutes app-routes
-  (cc/GET "/identity" [] (response "identity"))
-  (cc/GET "/identity/:id" [id] (response "identity" id))
+  (cc/GET "/identity" [] (response data/identities))
+  (cc/GET "/identity/:id" [id] (response data/identities id))
   (cc/GET "/" [] (response/redirect "/index.html"))
   (route/resources "/")
   (route/not-found "Not Found"))

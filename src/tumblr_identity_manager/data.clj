@@ -1,7 +1,7 @@
 (ns tumblr-identity-manager.data)
 
 ;; This simulates an identity table in a database.
-(def identity
+(def identities
   [{:_id 1
     :name "Bruce C. Miller"
     :preferred-name "Blake Delacroix"
@@ -129,7 +129,7 @@
     :tuplas []}
    {:_id 6
     :name "Jock Sterling"
-    :preferred-name "Fluttersly"
+    :preferred-name "Fluttershy"
     :identity-types ["brony" "otherkin" "ponykin"]
     :therian-species "pony"
     :sexuality "ponysexual"
