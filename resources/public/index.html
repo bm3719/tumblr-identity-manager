@@ -49,7 +49,6 @@
      $.getJSON("http://localhost:3000/identity",
                function(data) {
        var html = "";
-       var headmates = "";
        function drawNounselfPronouns(pronouns) {
          var pronounHTML = "";
          pronounHTML += "<table>";
@@ -68,14 +67,14 @@
          shiftHTML += "</table>";
          return shiftHTML;
        }
-       function drawSubIdentities(identity, field) {
-          var identityHTML = "";
-          for (var j=0; j<identity[field].length; j++) {
-            identityHTML += "<table>";
-            identityHTML += drawIdentity(identity[field][j]);
-            identityHTML += "</table>";
+       function drawSubIdentities(field) {
+          var subIdentityHTML = "";
+          for (var j=0; j<field.length; j++) {
+            subIdentityHTML += "<table>";
+            subIdentityHTML += drawIdentity(field[j]);
+            subIdentityHTML += "</table>";
          }
-         return identityHTML;
+         return subIdentityHTML;
          }
        function drawArray(arr) {
          arrHTML = arr.join("<br />");
@@ -96,8 +95,8 @@
          identityHTML += "<tr><td id=\"title\">Social justice causes:</td><td id=\"cnt\">" + drawArray(identity.socialJusticeCauses) + "</td></tr>";
          identityHTML += "<tr><td id=\"title\">Trigger words:</td><td id=\"cnt\">" + drawArray(identity.triggerWords) + "</td></tr>";
          identityHTML += "<tr><td id=\"title\">Disabilities:</td><td id=\"cnt\">" + drawArray(identity.disabilities) + "</td></tr>";
-         identityHTML += "<tr><td id=\"title\">Headmates:</td><td id=\"cnt\">" + drawSubIdentities(identity, "headmates") + "</td></tr>";
-         identityHTML += "<tr><td id=\"title\">Tuplas:</td><td id=\"cnt\">" + drawSubIdentities(identity, "tuplas") + "</td></tr>";
+         identityHTML += "<tr><td id=\"title\">Headmates:</td><td id=\"cnt\">" + drawSubIdentities(identity.headmates) + "</td></tr>";
+         identityHTML += "<tr><td id=\"title\">Tuplas:</td><td id=\"cnt\">" + drawSubIdentities(identity.tuplas) + "</td></tr>";
          identityHTML += "<tr id=\"div\"><td></td><td></td></tr>";
          identityHTML += "<tr id=\"div\"><td></td><td></td></tr>";
          return identityHTML;
@@ -105,7 +104,7 @@
        for (var i = 0; i<data.length; i++) {
          html += drawIdentity(data[i]);
        }
-       $('.user').append(html);
+       $('.user').html(html);
      });
    });
   </script>
