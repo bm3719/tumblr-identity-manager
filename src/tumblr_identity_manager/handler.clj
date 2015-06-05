@@ -26,9 +26,8 @@
 (defn link-children
   "Embeds maps in a parent that exists in vector v who references their :_id
   fields in sub-vector k." [col k v]
-  (map #(assoc % k (for [id (k (first v))]
-                     (some (fn [m] (if (= (:_id m) id) m)) v)))
-       col))
+  (assoc col k (for [id (k col)]
+               (some (fn [m] (if (= (:_id m) id) m)) v))))
 
 (defn get-maps
   "Simulates a function that goes to the database and grabs the specified table
@@ -36,9 +35,9 @@
   we're just assuming it's the identity table and only returning top-level
   records, then manually splicing in the child records." [table]
   (let [ref-ids (flatten (map #(concat (:headmates %) (:tuplas %)) table))]
-    (as-> (filter #(not (some #{(:_id %)} ref-ids)) table) $
-      (link-children $ :headmates table)
-      (link-children $ :tuplas table))))
+    (->> (filter #(not (some #{(:_id %)} ref-ids)) table)
+      (map #(link-children % :headmates table))
+      (map #(link-children % :tuplas table)))))
 
 (defn get-by-id [table id]
   (some #(if (= (:_id %) (util/str->int id)) %) (get-maps table)))

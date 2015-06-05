@@ -67,11 +67,11 @@
          shiftHTML += "</table>";
          return shiftHTML;
        }
-       function drawSubIdentities(field) {
+       function drawSubIdentities(identities) {
           var subIdentityHTML = "";
-          for (var j=0; j<field.length; j++) {
+          for (j in identities) {
             subIdentityHTML += "<table>";
-            subIdentityHTML += drawIdentity(field[j]);
+            subIdentityHTML += drawIdentity(identities[j]);
             subIdentityHTML += "</table>";
          }
          return subIdentityHTML;
@@ -101,7 +101,7 @@
          identityHTML += "<tr id=\"div\"><td></td><td></td></tr>";
          return identityHTML;
        }
-       for (var i = 0; i<data.length; i++) {
+       for (i in data) {
          html += drawIdentity(data[i]);
        }
        $('.user').html(html);

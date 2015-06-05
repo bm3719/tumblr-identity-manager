@@ -96,10 +96,8 @@
     :nounself-pronouns {:third-singular-subject "xie"
                         :third-singular-object "xier"
                         :reflexive "xierself"}
-    :trigger-words ["food"
-                    "dessert"
-                    "homogenous"
-                    "cake"]
+    :trigger-words ["fetch"
+                    "sit"]
     :disabilities ["IBS"
                    "leg beard"]
     :headmates []
@@ -121,7 +119,6 @@
                         :third-singular-object "galaxim"
                         :reflexive "galaximself"}
     :trigger-words ["collision"
-                    "heat death"
                     "GRB"
                     "supernova"]
     :disabilities ["chronic dizziness"]
@@ -165,10 +162,9 @@
     :nounself-pronouns {:third-singular-subject "galaxi"
                         :third-singular-object "galaxim"
                         :reflexive "galaximself"}
-    :trigger-words ["collision"
-                    "heat death"
-                    "GRB"
-                    "supernova"]
+    :trigger-words ["sidereal"
+                    "brane"
+                    "heat death"]
     :disabilities ["chronic dizziness"]
     :headmates []
     :tuplas []}
@@ -198,13 +194,13 @@
     :tuplas []}
    {:_id 9
     :name "Sonic the Hedgehog"
-    :preferred-name "Sonice"
+    :preferred-name "Sonic"
     :identity-types ["fictive" "otherkin"]
     :therian-species "hedgehog"
-    :sexuality ""
-    :gender ""
-    :trans-size ""
-    :trans-ethnicity ""
+    :sexuality "nobrosexual"
+    :gender "voidfluid"
+    :trans-size "sphere"
+    :trans-ethnicity "multi-tailed hedgehog"
     :shift-capabilities {:e-shift true
                          :m-shift true
                          :p-shift true}
@@ -213,7 +209,7 @@
                         :third-singular-object "him"
                         :reflexive "sonicthehedgehogself"}
     :trigger-words ["Eggman"
-                    "chili dog"]
+                    "chili dogs"]
     :disabilities ["ADD"
                    "ADHD"]
     :headmates []
