@@ -5,6 +5,8 @@
             [tumblr-identity-manager.camel-kebab :as ck]
             [tumblr-identity-manager.data :as data]
             [tumblr-identity-manager.utility :as util]
+            [tumblr-identity-manager.camel-kebab :as ck]
+            [clojure.core.memoize :as memo]
             [clojure.pprint :refer [pp pprint]]
             [clojure.repl :refer [doc]]
             [clojure.tools.namespace.repl :as repl]
@@ -42,3 +44,23 @@
   (when (and server (= (org.eclipse.jetty.server.Server/getState server) "STARTED"))
     (.stop server))
   (repl/refresh))
+
+;;; Profile case conversion code to find the optimal :fifo/threshold.
+
+;; Create a set of data roughly the size of what we would expect in a
+;; production system for the average large data returning REST call.
+(defn data
+  "Create n fake records and give them unique :_id values." [n]
+  (map #(assoc %1 :a %2)
+       (flatten (repeatedly (inc (/ n (count data/identities)))
+                            (fn [] data/identities)))
+       (range 1 (inc n))))
+
+(def d (data 10000))
+
+(defn run-test []
+  ;; Evaluate the data so that we're only testing the case conversion.
+  (count d)
+  (for [x (range 256 5000 256)]
+    (with-redefs [util/memoized->camelCase (memo/fifo ck/->kebab-case :fifo/threshold 4096)]
+      (time (doall util/kebab->camel d)))))

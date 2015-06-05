@@ -15,8 +15,8 @@
                          :m-shift true
                          :p-shift false}
     :nounself-pronouns {:third-singular-subject "xe"
-                        :third-singular-object "xim"
-                        :reflexive "ximself"}
+                        :third-singular-object "xir"
+                        :reflexive "xirself"}
     :social-justice-causes ["manspreading"
                             "class struggle"
                             "white able-bodied heterosexual cisgender male privilege"]
@@ -71,7 +71,7 @@
                             "safe spaces"]
     :nounself-pronouns {:third-singular-subject "zhe"
                         :third-singular-object "zhir"
-                        :reflexive "zhiself"}
+                        :reflexive "zhirself"}
     :trigger-words ["meat"
                     "doctor"
                     "hello"]
@@ -88,7 +88,7 @@
     :sexuality "skoliosexual"
     :gender "pangender"
     :trans-size "curvy"
-    :trans-ethnicity "dhampir"
+    :trans-ethnicity "skinwalker"
     :shift-capabilities {:e-shift true
                          :m-shift true
                          :p-shift true}
@@ -115,9 +115,9 @@
                          :m-shift true
                          :p-shift true}
     :social-justice-causes []
-    :nounself-pronouns {:third-singular-subject "galaxi"
-                        :third-singular-object "galaxim"
-                        :reflexive "galaximself"}
+    :nounself-pronouns {:third-singular-subject "galaxhe"
+                        :third-singular-object "galaxhim"
+                        :reflexive "galaxhimself"}
     :trigger-words ["collision"
                     "GRB"
                     "supernova"]
