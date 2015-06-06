@@ -1,14 +1,17 @@
 (ns tumblr-identity-manager.handler-test
-  (:require [clojure.test :refer :all]
+  (:require [tumblr-identity-manager.utility :as util]
+            [clojure.test :refer :all]
+            [cheshire.core :as cheshire]
             [ring.mock.request :as mock]
-            [test-comp.handler :refer :all]))
+            [tumblr-identity-manager.handler :refer :all]))
 
-;; (deftest test-app
-;;   (testing "main route"
-;;     (let [response (app (mock/request :get "/"))]
-;;       (is (= (:status response) 200))
-;;       (is (= (:body response) "Hello World"))))
+(deftest test-app
+  (testing "identity route"
+    (let [response (app (mock/request :get "/identity"))]
+      (is (= (:status response) 200))
+      (is (= (count (util/camel->kebab (cheshire/parse-string (:body response) true)))
+             3))))
 
-;;   (testing "not-found route"
-;;     (let [response (app (mock/request :get "/invalid"))]
-;;       (is (= (:status response) 404)))))
+  (testing "not-found route"
+    (let [response (app (mock/request :get "/invalid"))]
+      (is (= (:status response) 404)))))

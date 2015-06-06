@@ -57,10 +57,3 @@
        (range 1 (inc n))))
 
 (def d (data 10000))
-
-(defn run-test []
-  ;; Evaluate the data so that we're only testing the case conversion.
-  (count d)
-  (for [x (range 256 5000 256)]
-    (with-redefs [util/memoized->camelCase (memo/fifo ck/->kebab-case :fifo/threshold 4096)]
-      (time (doall util/kebab->camel d)))))

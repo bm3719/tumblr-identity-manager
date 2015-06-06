@@ -28,6 +28,14 @@
   "Given a string, converts it to kebab-case.  Excludes _id." [s]
   (if (= s "_id") s (memoized->kebab-case s)))
 
+(defn memo-test [data]
+  ;; Evaluate the data so that we're only testing the case conversion.
+  (count data)
+  ;; Run the test in increments of 256.
+  (for [x (range 256 5000 256)]
+    (with-redefs [memoized->camelCase (memo/fifo ck/->kebab-case :fifo/threshold x)]
+      (time (doall kebab->camel data)))))
+
 ;;; General utility functions.
 
 (defn str->int
