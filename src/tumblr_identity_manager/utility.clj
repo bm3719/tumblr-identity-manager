@@ -7,10 +7,10 @@
 ;;; Case conversion, memoized for performance.
 
 (def memoized->kebab-case
-  (memo/fifo ck/->kebab-case :fifo/threshold 4096))
+  (memo/fifo ck/->kebab-case :fifo/threshold 24))
 
 (def memoized->camelCase
-  (memo/fifo ck/->camelCase :fifo/threshold 4096))
+  (memo/fifo ck/->camelCase :fifo/threshold 24))
 
 (defn kebab->camel
   "Recursively transforms all kebab-case keys in coll to camelCase.
@@ -29,12 +29,11 @@
   (if (= s "_id") s (memoized->kebab-case s)))
 
 (defn memo-test [data]
-  ;; Evaluate the data so that we're only testing the case conversion.
-  (count data)
   ;; Run the test in increments of 256.
-  (for [x (range 256 5000 256)]
+  (for [x (range 2 48 2)]
     (with-redefs [memoized->camelCase (memo/fifo ck/->kebab-case :fifo/threshold x)]
-      (time (doall kebab->camel data)))))
+      (println "Testing fifo threshold of" x)
+      (time (count (doall (kebab->camel data)))))))
 
 ;;; General utility functions.
 

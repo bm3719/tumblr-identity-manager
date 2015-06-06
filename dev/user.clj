@@ -56,4 +56,4 @@
                             (fn [] data/identities)))
        (range 1 (inc n))))
 
-(def d (data 10000))
+(def d (data 100))
