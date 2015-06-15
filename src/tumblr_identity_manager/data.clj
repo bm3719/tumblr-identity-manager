@@ -18,7 +18,7 @@
                         :third-singular-object "xir"
                         :reflexive "xirself"}
     :social-justice-causes ["manspreading"
-                            "class struggle"
+                            "microaggressions"
                             "white able-bodied heterosexual cisgender male privilege"]
     :trigger-words ["food"
                     "dessert"
@@ -42,7 +42,7 @@
                          :m-shift true
                          :p-shift false}
     :social-justice-causes ["HAES/FA"
-                            "sexual consent"
+                            "shirtgate"
                             "slut shaming"]
     :nounself-pronouns {:third-singular-subject "accipatheriposimuisea"
                         :third-singular-object "accipatheriposimoisiam"
