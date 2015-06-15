@@ -92,7 +92,7 @@
     :shift-capabilities {:e-shift true
                          :m-shift true
                          :p-shift true}
-    :social-justice-causes []
+    :social-justice-causes ["transracial acceptance"]
     :nounself-pronouns {:third-singular-subject "xie"
                         :third-singular-object "xier"
                         :reflexive "xierself"}
@@ -103,8 +103,8 @@
     :headmates []
     :tuplas []}
    {:_id 5
-    :name "Galaxy G2"
-    :preferred-name "G2"
+    :name "Galaxy M2"
+    :preferred-name "M2"
     :identity-types ["galaxykin" "otherkin"]
     :therian-species "galaxy"
     :sexuality "galactosexual"
@@ -132,11 +132,11 @@
     :sexuality "ponysexual"
     :gender "female"
     :trans-size "2-dimensional"
-    :trans-ethnicity "pony"
+    :trans-ethnicity "African Canadian"
     :shift-capabilities {:e-shift true
                          :m-shift true
                          :p-shift true}
-    :social-justice-causes []
+    :social-justice-causes ["equine cruelty"]
     :nounself-pronouns {:third-singular-subject "shee"
                         :third-singular-object "hir"
                         :reflexive "hirself"}
@@ -176,12 +176,13 @@
     :sexuality "asexual"
     :gender "agendered"
     :trans-size "bodyless"
-    :trans-ethnicity "samoan"
+    :trans-ethnicity "Atlantean"
     :shift-capabilities {:e-shift true
                          :m-shift true
                          :p-shift true}
     :social-justice-causes ["alternative medicine"
-                            "anti-vax"]
+                            "anti-vax"
+                            "chemtrails awareness"]
     :nounself-pronouns {:third-singular-subject "qui"
                         :third-singular-object "quir"
                         :reflexive "quirself"}
@@ -222,10 +223,10 @@
     :sexuality "cishet"
     :gender "female"
     :trans-size "athletic"
-    :trans-ethnicity "Italian/Eyptian"
-    :shift-capabilities {:e-shift true
-                         :m-shift true
-                         :p-shift true}
+    :trans-ethnicity "Italian/Egyptian"
+    :shift-capabilities {:e-shift false
+                         :m-shift false
+                         :p-shift false}
     :social-justice-causes ["chic lit"]
     :nounself-pronouns {:third-singular-subject "she"
                         :third-singular-object "her"
