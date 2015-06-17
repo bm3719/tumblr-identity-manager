@@ -40,14 +40,14 @@
   </head>
   <center>
     <h1>Tumblr Identity Manager</h1>
-    <h2>identity management for special snowflakes</h2>
+    <img src="tumblr.png" />
   </center>
   <br /><p />
   <center>
   <button id="button1">get all identity records</button>
   <script type="text/javascript">
    $('#button1').click(function() {
-     $.getJSON("http://localhost:3000/identity",
+     $.getJSON("/identity",
                function(data) {
        var html = "";
        function drawNounselfPronouns(pronouns) {
