@@ -28,12 +28,12 @@
   "Given a string, converts it to kebab-case.  Excludes _id." [s]
   (if (= s "_id") s (memoized->kebab-case s)))
 
-(defn memo-test [data]
-  ;; Run the test in increments of 256.
+(defn memo-test
+  "Test a range of fifo/threshold values in increments of 2." [data]
   (for [x (range 2 48 2)]
     (with-redefs [memoized->camelCase (memo/fifo ck/->kebab-case :fifo/threshold x)]
-      (println "Testing fifo threshold of" x)
-      (time (count (doall (kebab->camel data)))))))
+      (print (format "Testing fifo/threshold of %2d -> " x))
+      (time (doall (kebab->camel data) nil)))))
 
 ;;; General utility functions.
 
