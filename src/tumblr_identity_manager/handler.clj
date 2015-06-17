@@ -9,7 +9,8 @@
             [ring.util.response :as response]
             [ring.middleware.defaults :refer [wrap-defaults site-defaults]]))
 
-(defn json-200 [to-render]
+(defn json-200
+  "Returns a successful 200 (OK) message." [to-render]
   {:status 200
    :headers {"Content-Type" "text/json; charset=utf-8"
              "Cache-Control" "no-cache, no-store, must-revalidate"
@@ -18,29 +19,32 @@
    :body (cheshire/generate-string
           (util/kebab->camel to-render))})
 
-(defn json-404 []
+(defn json-404
+  "Return a 404 (Not Found) message." []
   {:status 404
    :headers {"Content-Type" "text/html; charset=utf-8"}
-   :body "Not found"})
+   :body "Not Found"})
 
 (defn link-children
   "Embeds maps in a parent that exists in vector v who references their :_id
   fields in sub-vector k." [col k v]
   (assoc col k (for [id (k col)]
-               (some (fn [m] (if (= (:_id m) id) m)) v))))
+                 (some #(if (= (:_id %) id) %) v))))
 
 (defn get-maps
-  "Simulates a function that goes to the database and grabs the specified table
-  and does something with it prior to returning it to the front end.  Here,
-  we're just assuming it's the identity table and only returning top-level
-  records, then manually splicing in the child records." [table]
+  "Simulates a function that goes to the datastore and grabs the specified
+  table and does something with it prior to returning it to the front end.
+  Here, we're just assuming it's the identity table and only returning
+  top-level records, then manually splicing in the child records." [table]
   (let [ref-ids (flatten (map #(concat (:headmates %) (:tuplas %)) table))]
     (->> (filter #(not (some #{(:_id %)} ref-ids)) table)
-      (map #(link-children % :headmates table))
-      (map #(link-children % :tuplas table)))))
+         (map #(link-children % :headmates table))
+         (map #(link-children % :tuplas table)))))
 
-(defn get-by-id [table id]
-  (some #(if (= (:_id %) (util/str->int id)) %) (get-maps table)))
+(defn get-by-id
+  "Simulates a function that goes to the datastore and retrieves a record of
+  matching id from the specified table." [table id]
+  (some #(when (= (:_id %) (util/str->int id)) %) (get-maps table)))
 
 (cc/defroutes app-routes
   (cc/GET "/identity" [] (json-200 (get-maps data/identities)))
