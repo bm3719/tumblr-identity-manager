@@ -39,4 +39,4 @@
 
 (defn str->int
   "Safely parse untrusted strings to ints." [str]
-  (if (re-matches (re-pattern "\\d+") str) (read-string str)))
+  (when (re-matches (re-pattern "\\d+") str) (read-string str)))

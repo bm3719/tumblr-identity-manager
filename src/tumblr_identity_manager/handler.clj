@@ -42,14 +42,9 @@
 (defn get-by-id [table id]
   (some #(if (= (:_id %) (util/str->int id)) %) (get-maps table)))
 
-(defmacro response
-  "Creates responses used for endpoints."
-  ([entity-name] `(json-200 (get-maps ~entity-name)))
-  ([entity-name id] `(json-200 (get-by-id ~entity-name ~id))))
-
 (cc/defroutes app-routes
-  (cc/GET "/identity" [] (response data/identities))
-  (cc/GET "/identity/:id" [id] (response data/identities id))
+  (cc/GET "/identity" [] (json-200 (get-maps data/identities)))
+  (cc/GET "/identity/:id" [id] (json-200 (get-by-id data/identities id)))
   (cc/GET "/" [] (response/redirect "/index.html"))
   (route/resources "/")
   (route/not-found "Not Found"))
