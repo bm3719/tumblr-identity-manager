@@ -19,11 +19,11 @@
                         :reflexive "xirself"}
     :social-justice-causes ["manspreading"
                             "microaggressions"
-                            "white able-bodied heterosexual cisgender male privilege"]
-    :trigger-words ["food"
-                    "dessert"
-                    "homogenous"
-                    "cake"]
+                            "white able-bodied heterosexual cisgender species-normative male privilege"]
+    :trigger-words ["uncle"
+                    "mucus"
+                    "penetration"
+                    "rigid"]
     :disabilities ["trans-autism"
                    "trans-immobile"
                    "blood addiction"]
@@ -44,13 +44,13 @@
     :social-justice-causes ["HAES/FA"
                             "shirtgate"
                             "slut shaming"]
-    :nounself-pronouns {:third-singular-subject "accipatheriposimuisea"
-                        :third-singular-object "accipatheriposimoisiam"
-                        :reflexive "accipatheriposimousoself"}
-    :trigger-words ["uncle"
-                    "mucus"
-                    "penetration"
-                    "rigid"]
+    :nounself-pronouns {:third-singular-subject "ziuxi"
+                        :third-singular-object "ziuxous"
+                        :reflexive "ziuxouself"}
+    :trigger-words ["handsome"
+                    "dessert"
+                    "homogenous"
+                    "food"]
     :disabilities ["transobesity"]
     :headmates [7]
     :tuplas [8]}
@@ -182,7 +182,7 @@
                          :p-shift true}
     :social-justice-causes ["alternative medicine"
                             "anti-vax"
-                            "chemtrails awareness"]
+                            "pretty privilege"]
     :nounself-pronouns {:third-singular-subject "qui"
                         :third-singular-object "quir"
                         :reflexive "quirself"}
