@@ -5,13 +5,11 @@
             [tumblr-identity-manager.camel-kebab :as ck]
             [tumblr-identity-manager.data :as data]
             [tumblr-identity-manager.utility :as util]
-            [tumblr-identity-manager.camel-kebab :as ck]
             [clojure.core.memoize :as memo]
             [clojure.pprint :refer [pp pprint]]
             [clojure.repl :refer [doc]]
             [clojure.tools.namespace.repl :as repl]
-            [ring.adapter.jetty :as jetty])
-  (:import [org.eclipse.jetty.servlet ServletHolder ServletContextHandler FilterHolder]))
+            [ring.adapter.jetty :as jetty]))
 
 ;; Global Var that holds the server.
 (def server nil)
@@ -19,22 +17,19 @@
 (defn boot
   "Run this to start the server from the REPL."
   ([join?]
-     (alter-var-root
-      #'server
-      (constantly
-       (jetty/run-jetty
-        #'handler/app
-        {:join? join?
-         :port  3000
-         :ssl?  false}))))
+   (alter-var-root
+    #'server (constantly
+              (jetty/run-jetty #'handler/app
+                               {:join? join?
+                                :port  3000
+                                :ssl?  false}))))
   ([] (boot false)))
 
 (defn restart
   "Restart the Jetty server." []
   (if (nil? server) (boot)
-      (do
-        (when (= (org.eclipse.jetty.server.Server/getState server) "STARTED")
-          (.stop server))
+      (do (when (= (org.eclipse.jetty.server.Server/getState server) "STARTED")
+            (.stop server))
         (.start server))))
 
 (defn refresh
@@ -51,7 +46,7 @@
 ;; production system for the average large data returning REST call.
 (defn data
   "Create n fake records and give them unique :_id values." [n]
-  (map #(assoc %1 :a %2)
+  (map #(assoc %1 :_id %2)
        (flatten (repeatedly (inc (/ n (count data/identities)))
                             (fn [] data/identities)))
        (range 1 (inc n))))
