@@ -47,8 +47,7 @@
 (defn data
   "Create n fake records and give them unique :_id values." [n]
   (map #(assoc %1 :_id %2)
-       (flatten (repeatedly (inc (/ n (count data/identities)))
-                            (fn [] data/identities)))
+       (flatten (repeat (inc (/ n (count data/identities))) data/identities))
        (range 1 (inc n))))
 
 (def d (data 1000))
