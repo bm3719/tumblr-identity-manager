@@ -56,7 +56,7 @@
                             (fn [] data/identities)))
        (range 1 (inc n))))
 
-(def d (data 100))
+(def d (data 1000))
 
 (defn memo-test
   "Test a range of fifo/threshold values in increments of 2." [data]
