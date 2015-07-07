@@ -115,20 +115,19 @@
          return shiftHTML;
        }
        function drawSubIdentities(identities) {
-          var subIdentityHTML = "";
-          for (j in identities) {
-            subIdentityHTML += "<table>";
-            subIdentityHTML += drawIdentity(identities[j]);
-            subIdentityHTML += "</table>";
+         var subIdentityHTML = "";
+         for (j in identities) {
+           subIdentityHTML += drawIdentity(identities[j]);
          }
          return subIdentityHTML;
-         }
+       }
        function drawArray(arr) {
          arrHTML = arr.join("<br />");
          return arrHTML;
        }
        function drawIdentity(identity) {
          var identityHTML = "";
+         identityHTML += "<table>";
          identityHTML += "<tr><td id=\"title\">Name:</td><td id=\"cnt\">" + identity.name + "</td></tr>";
          identityHTML += "<tr><td id=\"title\">Preferred name:</td><td id=\"cnt\">" + identity.preferredName + "</td></tr>";
          identityHTML += "<tr><td id=\"title\">Identity types:</td><td id=\"cnt\">" + drawArray(identity.identityTypes) + "</td></tr>";
@@ -144,8 +143,7 @@
          identityHTML += "<tr><td id=\"title\">Disabilities:</td><td id=\"cnt\">" + drawArray(identity.disabilities) + "</td></tr>";
          identityHTML += "<tr><td id=\"title\">Headmates:</td><td id=\"cnt\">" + drawSubIdentities(identity.headmates) + "</td></tr>";
          identityHTML += "<tr><td id=\"title\">Tuplas:</td><td id=\"cnt\">" + drawSubIdentities(identity.tuplas) + "</td></tr>";
-         identityHTML += "<tr id=\"div\"><td></td><td></td></tr>";
-         identityHTML += "<tr id=\"div\"><td></td><td></td></tr>";
+         identityHTML += "</table>";
          return identityHTML;
        }
        for (i in data) {
@@ -156,7 +154,7 @@
    });
   </script>
   <p />
-  <table class="user">
-  </table>
+  <div class="user">
+  </div>
   </center>
 </html>
