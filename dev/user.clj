@@ -57,3 +57,10 @@
        (range 1 (inc n))))
 
 (def d (data 100))
+
+(defn memo-test
+  "Test a range of fifo/threshold values in increments of 2." [data]
+  (for [x (range 2 48 2)]
+    (with-redefs [util/memoized->camelCase (memo/fifo ck/->kebab-case :fifo/threshold x)]
+      (print (format "Testing fifo/threshold of %2d -> " x))
+      (time (doall (util/kebab->camel data) nil)))))
