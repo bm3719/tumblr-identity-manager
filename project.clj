@@ -5,7 +5,7 @@
             :url "http://www.gnu.org/copyleft/gpl.html"}
   :dependencies [[cheshire "5.4.0"]
                  [compojure "1.3.4"]
-                 [org.clojure/clojure "1.6.0"]
+                 [org.clojure/clojure "1.7.0"]
                  [org.clojure/core.memoize "0.5.7"]
                  [org.eclipse.jetty/jetty-servlet "7.6.1.v20120215"]
                  [ring/ring-defaults "0.1.5"]
