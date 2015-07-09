@@ -9,8 +9,8 @@ Concepts covered:
 - Traversing forms with clojure.walk.
 - Memoization and threshold profiling with clojure.core.memoize.
 
-These concepts will be presented at the National Capital Area Clojure Users
-Group on 2015-07-08.  See the [[http://www.meetup.com/Cap-Clug/events/223192323/][event page]] for details.
+These concepts were presented at the National Capital Area Clojure Users Group
+on 2015-07-08.  See the [[http://www.meetup.com/Cap-Clug/events/223192323/][event page]] for details.
 
 * Usage
 
